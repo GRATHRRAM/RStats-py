@@ -56,7 +56,16 @@ def center_window(win, width=420, height=370):
     win.geometry(f"{width}x{height}+{x}+{y}")
 
 root = tk.Tk()
-root.title("Roblox Game Stats Viewer")
+Title = ""
+try: 
+    response = requests.get(API_URL)
+    data = response.json()
+    game = data["data"][0]
+    Title = game["name"]
+except Exception as e:
+    print(e)
+
+root.title(f"RStats: {Title}")
 root.configure(bg="#1e1e2f")
 center_window(root)
 
